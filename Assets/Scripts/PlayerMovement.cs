@@ -3,20 +3,52 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    float jumpCharge = 0;
+    public GameObject floor;
     public Rigidbody2D playerRb;
+
+    float jumpCharge = 3;
+    public float maxCharge = 15;
 
     float initialTime;
     float newTime;
     float elapsedTime;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    void GroundCheck()
+    {
+        
+    }
+
+    void CalculateCharge()
+    {
+        newTime = Time.time;
+        elapsedTime = newTime - initialTime;
+    }
+   
+    void SetJumpCharge()
+    {
+        jumpCharge += elapsedTime * 10;
+
+        if (jumpCharge > maxCharge)
+        {
+            jumpCharge = maxCharge;
+        }
+       
+    }
+
+    void ExecuteJump()
+    {
+        playerRb.linearVelocity = Vector2.up * jumpCharge;
+    }
+
+
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -26,13 +58,13 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            newTime = Time.time;
-            elapsedTime = newTime - initialTime;
-            print(elapsedTime);
+            CalculateCharge();
+           
+            SetJumpCharge();
 
-            jumpCharge = elapsedTime * 10;
+            ExecuteJump();
 
-            playerRb.linearVelocity = Vector2.up * jumpCharge;
+            jumpCharge = 3;
 
         }
     }
