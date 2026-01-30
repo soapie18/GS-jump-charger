@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public GameObject floor;
     public Rigidbody2D playerRb;
 
     float jumpCharge = 3;
@@ -13,32 +12,64 @@ public class PlayerMovement : MonoBehaviour
     float newTime;
     float elapsedTime;
 
+    bool floorContact = false
 
-    void GroundCheck()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        
+        if (other.CompareTag("Floor"))
+        {
+            floorContact = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.CompareTag("Floor"))
+        {
+            floorContact = false;
+        }
+    }
+
+
+    bool GroundCheck()
+    {
+        if (floorContact)
+        {
+            return true;
+        }
+        else
+        {
+            return false;   
+        }
     }
 
     void CalculateCharge()
     {
-        newTime = Time.time;
-        elapsedTime = newTime - initialTime;
+       
+            newTime = Time.time;
+            elapsedTime = newTime - initialTime;
+        
     }
    
     void SetJumpCharge()
     {
-        jumpCharge += elapsedTime * 10;
+       
+            jumpCharge += elapsedTime * 10;
 
-        if (jumpCharge > maxCharge)
-        {
-            jumpCharge = maxCharge;
-        }
+            if (jumpCharge > maxCharge)
+            {
+                jumpCharge = maxCharge;
+            }
+        
        
     }
 
     void ExecuteJump()
     {
-        playerRb.linearVelocity = Vector2.up * jumpCharge;
+        if (GroundCheck())
+        {
+            playerRb.linearVelocity = Vector2.up * jumpCharge;
+        }
     }
 
 
