@@ -12,11 +12,11 @@ public class PlayerMovement : MonoBehaviour
     float newTime;
     float elapsedTime;
 
-    bool floorContact = false
+    bool floorContact = false;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Floor"))
+        if (other.gameObject.CompareTag("Floor"))
         {
             floorContact = true;
         }
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.CompareTag("Floor"))
+        if (other.gameObject.CompareTag("Floor"))
         {
             floorContact = false;
         }
@@ -39,29 +39,29 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            return false;   
+            return false;
         }
     }
 
     void CalculateCharge()
     {
-       
-            newTime = Time.time;
-            elapsedTime = newTime - initialTime;
-        
+
+        newTime = Time.time;
+        elapsedTime = newTime - initialTime;
+
     }
-   
+
     void SetJumpCharge()
     {
-       
-            jumpCharge += elapsedTime * 10;
 
-            if (jumpCharge > maxCharge)
-            {
-                jumpCharge = maxCharge;
-            }
-        
-       
+        jumpCharge += elapsedTime * 10;
+
+        if (jumpCharge > maxCharge)
+        {
+            jumpCharge = maxCharge;
+        }
+
+
     }
 
     void ExecuteJump()
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-  
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             CalculateCharge();
-           
+
             SetJumpCharge();
 
             ExecuteJump();
