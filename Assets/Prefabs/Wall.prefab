@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4922096921016325017}
   - component: {fileID: 5031197304004157315}
   - component: {fileID: 1623108200047562012}
+  - component: {fileID: -1986457961951977255}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -135,7 +136,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -151,3 +152,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-1986457961951977255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787922233630507913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f1e6c996d47d546821c4b7b78977c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WallTrigger
+  levelName: SampleScene

@@ -1,9 +1,11 @@
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour
 {
 
     public Rigidbody2D playerRb;
+    public SpriteRenderer playerSprite;
 
     float jumpCharge = 3;
     float minCharge = 3;
@@ -87,10 +89,13 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 incrementTime += Time.deltaTime;
+                playerSprite.color = new Color(1, 0 ,0);
 
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
+                playerSprite.color = Color.yellow;
+
                 CalculateCharge();
 
                 SetJumpCharge();
