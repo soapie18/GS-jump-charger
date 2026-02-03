@@ -471,6 +471,10 @@ PrefabInstance:
       propertyPath: spawnRate
       value: 4.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2681725850494089115, guid: 73bb4643aac070f49a036eac000c219d, type: 3}
+      propertyPath: spawnOffset
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2890999571777617913, guid: 73bb4643aac070f49a036eac000c219d, type: 3}
       propertyPath: m_Name
       value: WallSpawner

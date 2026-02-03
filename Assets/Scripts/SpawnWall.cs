@@ -7,11 +7,17 @@ public class SpawnWall : MonoBehaviour
     float timePassed;
     public float spawnRate;
 
+    public float spawnOffset = 5;
+
 
     void SpawnInstance()
     {
-        Instantiate(wall, transform.position, transform.rotation);
+        float maxHeight = transform.position.y;
+        float minHeight = transform.position.y - spawnOffset; 
+
+        Instantiate(wall, new Vector3(transform.position.x, Random.Range(minHeight, maxHeight), 0), transform.rotation);
     }
+
     void Start()
     {
         SpawnInstance();
