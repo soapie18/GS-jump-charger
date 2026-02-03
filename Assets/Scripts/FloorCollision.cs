@@ -20,7 +20,7 @@ public class FloorCollision : MonoBehaviour
        
     }
 
-    OnTriggerStay(Collider2D other)
+    void OnTriggerStay(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
