@@ -4,7 +4,7 @@ using UnityEngine;
 public class FloorCollision : MonoBehaviour
 {
 
-    public bool inContact;
+
 
 
     void Start()
@@ -20,16 +20,5 @@ public class FloorCollision : MonoBehaviour
        
     }
 
-    void OnTriggerStay(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            inContact = true;
-        }
-        else
-        {
-            inContact = false;
-        }
-
-    }
+ 
 }

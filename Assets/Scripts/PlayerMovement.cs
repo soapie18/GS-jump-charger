@@ -6,19 +6,20 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D playerRb;
 
     float jumpCharge = 3;
+    float minCharge = 3;
     public float maxCharge = 15;
 
-    float initialTime;
-    float newTime;
+    float incrementTime;
     float elapsedTime;
 
-    bool floorContact = false;
+    public bool floorContact = false;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Floor"))
         {
             floorContact = true;
+
         }
     }
 
@@ -33,21 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
     bool GroundCheck()
     {
-        if (floorContact)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return floorContact;
+
     }
 
     void CalculateCharge()
     {
 
-        newTime = Time.time;
-        elapsedTime = newTime - initialTime;
+        elapsedTime = incrementTime;
 
     }
 
@@ -61,42 +55,54 @@ public class PlayerMovement : MonoBehaviour
             jumpCharge = maxCharge;
         }
 
-
     }
 
     void ExecuteJump()
     {
         if (GroundCheck())
         {
+            incrementTime = 0;
             playerRb.linearVelocity = Vector2.up * jumpCharge;
         }
     }
+
+  
 
 
 
     void Start()
     {
-
+        floorContact = true;
     }
+
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        print(GroundCheck());
+
+        if (GroundCheck())
         {
-            initialTime = Time.time;
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                incrementTime += Time.deltaTime;
+
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                CalculateCharge();
+
+                SetJumpCharge();
+
+                ExecuteJump();
+
+            }
 
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        else
         {
-            CalculateCharge();
-
-            SetJumpCharge();
-
-            ExecuteJump();
-
-            jumpCharge = 3;
-
+            jumpCharge = minCharge;
         }
     }
 }
