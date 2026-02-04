@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     float elapsedTime;
 
     public bool floorContact = false;
+    bool isCharging = false;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -38,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
     {
         return floorContact;
 
+    }
+
+    void StartIncrement()
+    {
+        incrementTime += Time.deltaTime;
     }
 
     void CalculateCharge()
@@ -68,33 +74,47 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-  
-
-
+    void SetBallColour()
+    {
+        if (isCharging)
+        {
+            playerSprite.color = Color.Lerp(Color.yellow, Color.red, (incrementTime-0.1f));
+        }
+        else
+        {
+            playerSprite.color = Color.yellow;
+        }
+    }
+ 
 
     void Start()
     {
         floorContact = true;
+        SetBallColour();
     }
 
 
 
     void Update()
     {
-        print(GroundCheck());
 
         if (GroundCheck())
         {
 
             if (Input.GetKey(KeyCode.Space))
             {
-                incrementTime += Time.deltaTime;
-                playerSprite.color = new Color(1, 0 ,0);
+                StartIncrement();
+
+                isCharging = true;
+
+                SetBallColour();
 
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                playerSprite.color = Color.yellow;
+                isCharging = false;
+
+                SetBallColour();    
 
                 CalculateCharge();
 

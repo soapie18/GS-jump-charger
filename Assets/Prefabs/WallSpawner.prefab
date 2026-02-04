@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnWall
   wall: {fileID: 1787922233630507913, guid: 22048aebba0a33c469e00b442171deca, type: 3}
-  spawnRate: 4.5
+  spawnRate: 4.1
+  spawnOffset: 5
