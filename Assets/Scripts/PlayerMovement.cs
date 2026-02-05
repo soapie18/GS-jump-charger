@@ -9,20 +9,18 @@ public class PlayerMovement : MonoBehaviour
     public GameObject playerPivot;
 
     //Variables
+    float elapsedTime;
+
     float jumpCharge = 3;
     float minCharge = 3;
     public float maxCharge = 15;
-
-    float incrementTime;
-    float elapsedTime;
 
     public bool floorContact = false;
     bool isCharging = false;
 
 
-
-    //Tracks collision with floor
-    private void OnCollisionEnter2D(Collision2D other)
+    //Tracks collision with trigger area on floor
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Floor"))
         {
@@ -31,8 +29,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Tracks leaving collision area on floor
-    private void OnCollisionExit2D(Collision2D other)
+
+    //Tracks leaving trigger area on floor
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Floor"))
         {
@@ -48,18 +47,14 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    //The following 3 functions are responsible for figuring out how high the player will jump
+    //The following functions are responsible for figuring out how high the player will jump
     void StartIncrement()
     {
-        incrementTime += Time.deltaTime;
-    }
 
-    void CalculateCharge()
-    {
-
-        elapsedTime = incrementTime;
+        elapsedTime += Time.deltaTime;
 
     }
+
 
     //This one also caps the charge the player can build to a max value
     void SetJumpCharge()
@@ -79,17 +74,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GroundCheck())
         {
-            incrementTime = 0;
+            elapsedTime = 0;
             playerRb.linearVelocity = Vector2.up * jumpCharge;
         }
     }
 
     //Lerping colour based on charge amount/time
-    void SetBallColour()
+    void SetBallColour(float time)
     {
         if (isCharging)
         {
-            playerSprite.color = Color.Lerp(Color.yellow, Color.red, (incrementTime - 0.1f));
+            playerSprite.color = Color.Lerp(Color.yellow, Color.orangeRed, (time - 0.1f));
         }
         else
         {
@@ -97,12 +92,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void ScaleBall()
+    //Scales the ball in alignment with the charge incrementing. 
+    void ScaleBall(float time)
     {
+        float ballScale = time / 2;
+
         if (isCharging)
         {
-            float ballScale = incrementTime / 2;
-
             playerPivot.transform.localScale = new Vector2(1, (1 - ballScale));
 
         }
@@ -117,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         floorContact = true;
-        SetBallColour();
+        SetBallColour(elapsedTime);
 
     }
 
@@ -134,13 +130,13 @@ public class PlayerMovement : MonoBehaviour
             //the key is pressed on) then start the clock and lerp the colour
             if (Input.GetKey(KeyCode.Space))
             {
-                ScaleBall();
 
                 StartIncrement();
 
                 isCharging = true;
 
-                SetBallColour();
+                SetBallColour(elapsedTime);
+                ScaleBall(elapsedTime);
 
             }
             //If the key is released this frame, set the colour back to yellow and 
@@ -149,16 +145,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 isCharging = false;
 
-                CalculateCharge();
-
                 SetJumpCharge();
-
                 ExecuteJump();
 
-                ScaleBall();
-
-                SetBallColour();
-
+                SetBallColour(elapsedTime);
+                ScaleBall(elapsedTime);
 
             }
 
