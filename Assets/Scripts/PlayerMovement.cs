@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     //References
     public Rigidbody2D playerRb;
     public SpriteRenderer playerSprite;
+    public GameObject playerPivot;
 
     //Variables
     float jumpCharge = 3;
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool floorContact = false;
     bool isCharging = false;
+
+
 
     //Tracks collision with floor
     private void OnCollisionEnter2D(Collision2D other)
@@ -86,19 +89,36 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isCharging)
         {
-            playerSprite.color = Color.Lerp(Color.yellow, Color.red, (incrementTime-0.1f));
+            playerSprite.color = Color.Lerp(Color.yellow, Color.red, (incrementTime - 0.1f));
         }
         else
         {
             playerSprite.color = Color.yellow;
         }
     }
- 
+
+    void ScaleBall()
+    {
+        if (isCharging)
+        {
+            float ballScale = incrementTime / 2;
+
+            playerPivot.transform.localScale = new Vector2(1, (1 - ballScale));
+
+        }
+        else
+        {
+            playerPivot.transform.localScale = new Vector2(1, 1);
+        }
+
+    }
+
 
     void Start()
     {
         floorContact = true;
         SetBallColour();
+
     }
 
 
@@ -114,6 +134,8 @@ public class PlayerMovement : MonoBehaviour
             //the key is pressed on) then start the clock and lerp the colour
             if (Input.GetKey(KeyCode.Space))
             {
+                ScaleBall();
+
                 StartIncrement();
 
                 isCharging = true;
@@ -127,13 +149,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 isCharging = false;
 
-                SetBallColour();    
-
                 CalculateCharge();
 
                 SetJumpCharge();
 
                 ExecuteJump();
+
+                ScaleBall();
+
+                SetBallColour();
+
 
             }
 
