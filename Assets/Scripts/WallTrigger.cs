@@ -1,17 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class WallTrigger : MonoBehaviour
 {
-    public string levelName;
+ 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(levelName);
 
-        }
+        SceneManager.LoadScene("SampleScene");
 
     }
+
+
+
 }

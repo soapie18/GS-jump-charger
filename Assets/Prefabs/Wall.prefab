@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9176119dbb35f79499e4158edaa28163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallMovement
-  moveSpeed: 2.5
+  moveSpeed: 3.7
 --- !u!61 &1623108200047562012
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -165,7 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f1e6c996d47d546821c4b7b78977c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallTrigger
-  levelName: SampleScene
 --- !u!1 &4508185994437413444
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,10 +176,9 @@ GameObject:
   - component: {fileID: 2384010025569629735}
   - component: {fileID: 574930764259159466}
   - component: {fileID: 4176276366149136678}
-  - component: {fileID: 165733563649726310}
   m_Layer: 0
-  m_Name: Isometric Diamond
-  m_TagString: Untagged
+  m_Name: Star
+  m_TagString: Star
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,15 +307,3 @@ PolygonCollider2D:
       - {x: 0.0039675236, y: -0.29692373}
       - {x: 0.6073129, y: -0.0044862907}
   m_UseDelaunayMesh: 0
---- !u!114 &165733563649726310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4508185994437413444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d47338de52d2663409f0945a0a989ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectibleStar

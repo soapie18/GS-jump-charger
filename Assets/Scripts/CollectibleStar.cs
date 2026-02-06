@@ -1,19 +1,42 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.Events;
+
 
 public class CollectibleStar : MonoBehaviour
 {
-    void DestroyStar()
+
+    int starScore = 0;
+
+    int IncreaseScore(int score)
     {
-        gameObject.SetActive(false);
+        score += 1;
+
+        return score;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        DestroyStar();
+        if (other.CompareTag("Star"))
+        {
+            starScore = IncreaseScore(starScore);
+
+            Destroy(other.gameObject);
+
+            print("Score: " + starScore);
+
+        }
+    }
+   
+
+
+    private void Start()
+    {
+      
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+        print(starScore);
     }
 }
