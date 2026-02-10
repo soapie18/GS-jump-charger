@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     //References
     public Rigidbody2D playerRb;
     public SpriteRenderer playerSprite;
-    public GameObject playerPivot;
 
     //Variables
     float elapsedTime;
@@ -37,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
         {
             floorContact = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        other.gameObject.SendMessage("HitRegister");
     }
 
 
@@ -92,23 +96,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Scales the ball in alignment with the charge incrementing. 
-    void ScaleBall(float time)
-    {
-        float ballScale = time / 2;
-
-        if (isCharging)
-        {
-            playerPivot.transform.localScale = new Vector2(1, (1 - ballScale));
-
-        }
-        else
-        {
-            playerPivot.transform.localScale = new Vector2(1, 1);
-        }
-
-    }
-
 
     void Start()
     {
@@ -136,7 +123,6 @@ public class PlayerMovement : MonoBehaviour
                 isCharging = true;
 
                 SetBallColour(elapsedTime);
-                ScaleBall(elapsedTime);
 
             }
             //If the key is released this frame, set the colour back to yellow and 
@@ -149,8 +135,6 @@ public class PlayerMovement : MonoBehaviour
                 ExecuteJump();
 
                 SetBallColour(elapsedTime);
-                ScaleBall(elapsedTime);
-
             }
 
         }
@@ -158,5 +142,8 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpCharge = minCharge;
         }
+
+
+
     }
 }

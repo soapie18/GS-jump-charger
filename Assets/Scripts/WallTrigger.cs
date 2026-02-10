@@ -4,10 +4,11 @@ using UnityEngine.Events;
 
 public class WallTrigger : MonoBehaviour
 {
- 
 
-    private void OnTriggerEnter2D(Collider2D other)
+
+    void HitRegister()
     {
+        print("Wall recieved Message");
 
         SceneManager.LoadScene("SampleScene");
 
