@@ -26,6 +26,10 @@ public class PlayerMovement : MonoBehaviour
             floorContact = true;
 
         }
+        else
+        {
+            other.gameObject.SendMessage("HitRegister", SendMessageOptions.DontRequireReceiver);
+        }
     }
 
 
@@ -38,9 +42,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Sending out a message to trigger any implementations in other scripts for this event
     private void OnCollisionEnter2D(Collision2D other)
     {
-        other.gameObject.SendMessage("HitRegister");
+        other.gameObject.SendMessage("HitRegister", SendMessageOptions.DontRequireReceiver);
     }
 
 

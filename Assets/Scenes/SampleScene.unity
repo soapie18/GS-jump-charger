@@ -419,6 +419,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1054104438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3798857769767382004, guid: 113debf337b090542b357744847dcbe4, type: 3}
+  m_PrefabInstance: {fileID: 1238315736}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1054104445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054104438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c33058336d7558438bb546c36745ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
 --- !u!1001 &1238315736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -471,18 +488,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4307497579073019214, guid: 113debf337b090542b357744847dcbe4, type: 3}
-      propertyPath: star
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962407236963955445, guid: 113debf337b090542b357744847dcbe4, type: 3}
-      propertyPath: maxCharge
-      value: 13.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3798857769767382004, guid: 113debf337b090542b357744847dcbe4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1054104445}
   m_SourcePrefab: {fileID: 100100000, guid: 113debf337b090542b357744847dcbe4, type: 3}
 --- !u!1001 &1500152145
 PrefabInstance:

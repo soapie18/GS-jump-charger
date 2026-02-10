@@ -18,14 +18,15 @@ public class StarTrigger : MonoBehaviour
 
     void HitRegister()
     {
-        print("Star Recieved Message");
+        ScoreManager.instance.AddPoint();
+
 
         float timeSinceHit = 0;
 
         while (timeSinceHit < 1)
         {
             timeSinceHit += Time.deltaTime;
-            startPosition += 0.05f;
+            startPosition += 0.5f;
         }
 
         if(timeSinceHit >= 1)

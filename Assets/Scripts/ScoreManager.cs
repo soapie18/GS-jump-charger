@@ -2,13 +2,34 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static ScoreManager instance;
+
+    int starScore = 0;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
+    public void ResetScore()
+    {
+        starScore = 0;
+    }
+
+
+    public void AddPoint()
+    {
+        starScore += 1;
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
