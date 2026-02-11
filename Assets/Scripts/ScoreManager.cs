@@ -27,11 +27,20 @@ public class ScoreManager : MonoBehaviour
     public void AddPoint()
     {
         starScore += 1;
+
         scoreText.text = "score: " + starScore.ToString();
+
+        if (hiScore < starScore)
+        {
+        PlayerPrefs.SetInt("hiScore", starScore);
+        }
     }
 
     void Start()
     {
+        //Get val of highscore from saved data
+        hiScore = PlayerPrefs.GetInt("hiScore", 0);
+        //Set both ui texts with correct values
         scoreText.text = "score: " + starScore.ToString();
         highscoreText.text = "highscore: " + hiScore.ToString();
     }
