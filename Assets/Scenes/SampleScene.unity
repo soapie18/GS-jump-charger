@@ -539,6 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c33058336d7558438bb546c36745ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  scoreText: {fileID: 1521817335}
+  highscoreText: {fileID: 1469331977}
 --- !u!1001 &1238315736
 PrefabInstance:
   m_ObjectHideFlags: 0
