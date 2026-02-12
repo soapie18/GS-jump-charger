@@ -13,7 +13,7 @@ public class WallMovement : MonoBehaviour
         transform.position += (Vector3.left * moveSpeed) * Time.deltaTime;
     }
 
-    //For optimisation, walls passing a certain point will be deleted
+    //For optimisation, walls passing a certain point on x axis will be deleted
     void Purge()
     {
         if (transform.position.x < deadZone)

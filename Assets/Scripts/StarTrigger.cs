@@ -9,7 +9,9 @@ public class StarTrigger : MonoBehaviour
     Color startColour = new Color32(241, 239, 228, 255);
     Color hitColour = new Color32(241, 239, 228, 0);
 
-    //Not currently in use - no time to fix bugs it causes
+    float floatUpSpeed = 0.7f;
+
+    //Original Approach to moving up on hit - too faffy & created bugs
     Vector3 startPosition;
     float newY;
     Vector3 hitPosition;
@@ -22,10 +24,18 @@ public class StarTrigger : MonoBehaviour
         spriteRenderer.color = Color.Lerp(a, b, time);
     }
 
-    //Not currently in use
+
+    //Original Approach to moving up on hit - would call in update, line after lerping colour
     void LerpPosition(Vector3 a, Vector3 b, float time)
     {
         transform.position = Vector3.Lerp(a, b, time);
+    }
+
+    //A much simpler approach - I remembered I could do this kind of thing by looking back
+    //at my wall movement script
+    void MoveUpwards()
+    {
+        transform.position += (Vector3.up * floatUpSpeed) * Time.deltaTime;
     }
 
     //Answers to event sent out by player on hit of star. Communicates 
@@ -43,6 +53,7 @@ public class StarTrigger : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        //Original Approach to moving up on hit - too faffy
         //startPosition = transform.position;  
         //newY = transform.position.y + 1; 
     }
@@ -57,6 +68,7 @@ public class StarTrigger : MonoBehaviour
             //hitPosition = new Vector3(transform.position.x, newY, transform.position.z);
 
             LerpSpriteColour(startColour, hitColour, timeSinceHit);
+            MoveUpwards();
            
         }
         //Resetting timer used by lerp function and making hit  = false to avoid repeating the 
