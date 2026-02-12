@@ -18,7 +18,9 @@ public class PlayerMovement : MonoBehaviour
     bool isCharging = false;
 
 
-    //Tracks collision with trigger area on floor
+    //Tracks collision with trigger area on floor and other objects - if
+    //player hits anything other than floor, the event is triggered to
+    //register a hit which means different things for different objects.
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Floor"))
@@ -56,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    //The following functions are responsible for figuring out how high the player will jump
     void StartIncrement()
     {
 
@@ -65,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //This one also caps the charge the player can build to a max value
+    //Calculates jump force & caps the charge the player can build
+    //to a max value
     void SetJumpCharge()
     {
 
@@ -78,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    //Takes calculated force and applies it to player
+    //Takes calculated force and applies it to player object
     void ExecuteJump()
     {
         if (GroundCheck())
@@ -93,10 +95,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isCharging)
         {
+            //Subtracting 0.1 to better align colour with charge level
             playerSprite.color = Color.Lerp(Color.yellow, Color.orangeRed, (time - 0.1f));
         }
         else
         {
+            //Default colour
             playerSprite.color = Color.yellow;
         }
     }

@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    //Creating an instance allows me to call functions from this 
+    //script in another script.
     public static ScoreManager instance;
 
     public Text scoreText;
@@ -28,8 +30,10 @@ public class ScoreManager : MonoBehaviour
     {
         starScore += 1;
 
+        //Update UI
         scoreText.text = "score: " + starScore.ToString();
 
+        //Set highscore if it beats current value stored
         if (hiScore < starScore)
         {
         PlayerPrefs.SetInt("hiScore", starScore);
@@ -38,9 +42,10 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        //Get val of highscore from saved data
+        //Get value of highscore from saved data
         hiScore = PlayerPrefs.GetInt("hiScore", 0);
-        //Set both ui texts with correct values
+
+        //Set both UI text with correct values
         scoreText.text = "score: " + starScore.ToString();
         highscoreText.text = "highscore: " + hiScore.ToString();
     }
