@@ -65,6 +65,7 @@ public class StarTrigger : MonoBehaviour
         {
             timeSinceHit += Time.deltaTime;
 
+            //Old approach
             //hitPosition = new Vector3(transform.position.x, newY, transform.position.z);
 
             LerpSpriteColour(startColour, hitColour, timeSinceHit);
