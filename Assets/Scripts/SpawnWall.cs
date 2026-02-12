@@ -9,7 +9,7 @@ public class SpawnWall : MonoBehaviour
 
     public float spawnOffset = 5;
 
-
+    //Function that spawns walls at varied heights within a range
     void SpawnInstance()
     {
         float maxHeight = transform.position.y;
@@ -23,6 +23,8 @@ public class SpawnWall : MonoBehaviour
         SpawnInstance();
     }
 
+    //Spawns a new wall if its been longer than whatever the value of spawn rate
+    //is set to in editor.
     void Update()
     {
         if(timePassed < spawnRate)

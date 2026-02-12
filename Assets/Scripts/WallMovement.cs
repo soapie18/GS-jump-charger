@@ -6,12 +6,14 @@ public class WallMovement : MonoBehaviour
 
     float deadZone = -11;
 
+    //Smoothly moves walls left, same rate for all machines because using Time.deltaTime
     void UpdateMovement()
     {
 
         transform.position += (Vector3.left * moveSpeed) * Time.deltaTime;
     }
 
+    //For optimisation, walls passing a certain point will be deleted
     void Purge()
     {
         if (transform.position.x < deadZone)
